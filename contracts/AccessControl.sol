@@ -4,8 +4,9 @@
 pragma solidity >=0.6.0 <0.8.0;
 
 import "./interfaces/IAccessControl.sol";
+import "./RelayReceiver.sol";
 
-contract AccessControl is IAccessControl {
+contract AccessControl is IAccessControl, RelayReceiver {
     // TODO, consider moving storage to lib, for diamond tests
     bool hasRoleMock;
 
