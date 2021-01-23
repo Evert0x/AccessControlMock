@@ -4,9 +4,9 @@
 pragma solidity >=0.6.0 <0.8.0;
 
 import "./interfaces/IAccessControl.sol";
-import "./RelayReceiver.sol";
+import "./AccessControlView.sol";
 
-contract AccessControl is IAccessControl, RelayReceiver {
+contract AccessControl is IAccessControl, AccessControlView {
     // TODO, consider moving storage to lib, for diamond tests
     bool hasRoleMock;
 
@@ -68,27 +68,4 @@ contract AccessControl is IAccessControl, RelayReceiver {
     function revokeRole(bytes32 role, address account) external override {}
 
     function renounceRole(bytes32 role, address account) external override {}
-
-    bool _hasRoleMock;
-
-    function mock_hasRole(bool _value) public {
-        _hasRoleMock = _value;
-    }
-
-    function _hasRole(bytes32 role, address account)
-        internal
-        virtual
-        view
-        returns (bool)
-    {
-        return _hasRoleMock;
-    }
-
-    function _setupRole(bytes32 role, address account) internal virtual {}
-
-    function _setRoleAdmin(bytes32 role, bytes32 adminRole) internal virtual {}
-
-    function _grantRole(bytes32 role, address account) internal virtual {}
-
-    function _revokeRole(bytes32 role, address account) internal virtual {}
 }
